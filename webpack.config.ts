@@ -1,5 +1,6 @@
 import path from "path"
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { Configuration } from "webpack"
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server"
 
@@ -12,6 +13,7 @@ interface Env {
 
 export default ({ mode = "development", port = 3000 }: Env) => {
 	const isDev = mode === "development"
+	const isProd = mode === "production"
 
 	const devServer: DevServerConfiguration = {
 		port,
@@ -26,9 +28,20 @@ export default ({ mode = "development", port = 3000 }: Env) => {
 			filename: '[name].[contenthash].js',
 			clean: true
 		},
-		plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') })],
+		plugins: [
+			new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') }),
+			isProd && new MiniCssExtractPlugin({
+				filename: 'css/[name].[contenthash:8].css',
+				chunkFilename: 'css/[name].[contenthash:8].css'
+			})
+		].filter(Boolean),
 		module: {
 			rules: [
+				{
+					test: /\.css$/i,
+					use: [isDev ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+					exclude: /node_modules/,
+				},
 				{
 					test: /\.tsx?$/,
 					use: 'ts-loader',
