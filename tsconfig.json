@@ -9,6 +9,14 @@
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"paths": {
+			"@pages/*": [
+				"./src/pages/*"
+			],
+			"@components/*": [
+				"./src/components/*"
+			]
+		},
 		"plugins": [
 			{
 				"name": "typescript-plugin-css-modules"

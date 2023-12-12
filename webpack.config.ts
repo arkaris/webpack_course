@@ -16,6 +16,8 @@ export default ({ mode, port, analyzer }: Env) => {
 			entry: path.resolve(__dirname, 'src', 'index.tsx'),
 			output: path.resolve(__dirname, 'build'),
 			html: path.resolve(__dirname, 'public', 'index.html'),
+			pages: path.resolve(__dirname, 'src', 'pages'),
+			components: path.resolve(__dirname, 'src', 'components'),
 		},
 		analyzer: analyzer ?? false
 	})

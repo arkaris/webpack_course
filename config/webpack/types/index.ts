@@ -2,6 +2,8 @@ export interface BuildPaths {
 	entry: string
 	html: string
 	output: string
+	pages: string
+	components: string
 }
 
 export type BuildMode = "development" | "production"
