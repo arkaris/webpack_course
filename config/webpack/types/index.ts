@@ -10,4 +10,5 @@ export interface WebpackOptions {
 	mode: BuildMode
 	port: number
 	paths: BuildPaths
+	analyzer?: boolean
 }

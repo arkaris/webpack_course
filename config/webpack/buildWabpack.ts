@@ -1,7 +1,7 @@
 import { Configuration } from "webpack";
 import { buildDevServer } from "./buildDevServer";
 import { buildLoaders } from './buildLoaders';
-import { buildPlugins } from "./buildPlagins";
+import { buildPlugins } from "./buildPlugins";
 import { WebpackOptions } from "./types";
 
 export function buildWebpack(options: WebpackOptions): Configuration {

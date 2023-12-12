@@ -3,11 +3,12 @@ import { buildWebpack } from "./config/webpack/buildWabpack";
 import { BuildMode } from "./config/webpack/types";
 
 interface Env {
-	mode?: BuildMode,
+	mode?: BuildMode
 	port?: number
+	analyzer?: boolean
 }
 
-export default ({ mode, port }: Env) => {
+export default ({ mode, port, analyzer }: Env) => {
 	return buildWebpack({
 		mode: mode ?? "development",
 		port: port ?? 3000,
@@ -15,6 +16,7 @@ export default ({ mode, port }: Env) => {
 			entry: path.resolve(__dirname, 'src', 'index.tsx'),
 			output: path.resolve(__dirname, 'build'),
 			html: path.resolve(__dirname, 'public', 'index.html'),
-		}
+		},
+		analyzer: analyzer ?? false
 	})
 }
