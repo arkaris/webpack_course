@@ -1,91 +1,20 @@
-import path from "path"
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { Configuration } from "webpack"
-import type { Configuration as DevServerConfiguration } from "webpack-dev-server"
-
-type Mode = "production" | "development";
+import path from "path";
+import { buildWebpack } from "./config/webpack/buildWabpack";
+import { BuildMode } from "./config/webpack/types";
 
 interface Env {
-	mode?: Mode,
+	mode?: BuildMode,
 	port?: number
 }
 
-export default ({ mode = "development", port = 3000 }: Env) => {
-	const isDev = mode === "development"
-	const isProd = mode === "production"
-
-	const devServer: DevServerConfiguration = {
-		port,
-		open: true
-	}
-
-	const config: Configuration = {
-		mode,
-		entry: path.resolve(__dirname, 'src', 'index.tsx'),
-		output: {
-			path: path.resolve(__dirname, 'build'),
-			filename: '[name].[contenthash].js',
-			clean: true
-		},
-		plugins: [
-			new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') }),
-			isProd && new MiniCssExtractPlugin({
-				filename: 'css/[name].[contenthash:8].css',
-				chunkFilename: 'css/[name].[contenthash:8].css'
-			})
-		].filter(Boolean),
-		module: {
-			rules: [
-				{
-					test: /\.module\.css$/i,
-					use: [
-						isDev ? "style-loader" : MiniCssExtractPlugin.loader,
-						{
-							loader: "css-loader",
-							options: {
-								importLoaders: 1,
-								sourceMap: true,
-								modules: {
-									localIdentName: isDev ? "[name]__[local]" : "[hash:base64:8]",
-								},
-							},
-						},
-						{
-							loader: "postcss-loader",
-							options: {
-								sourceMap: true,
-								postcssOptions: {
-									plugins: [
-										// require("postcss-import")(),
-										// require("postcss-preset-env")(),
-										// require("postcss-flexbugs-fixes"),
-										// require("postcss-url")({ url: "inline", optimizeSvgEncode: true }),
-										// require("postcss-simple-vars")(),
-										// require("postcss-calc")(),
-										// require("postcss-browser-reporter")(),
-										// require("postcss-reporter")(),
-										// require("postcss-nested")(),
-										// require("postcss-media-minmax")(),
-									],
-								},
-							},
-						},
-					],
-					exclude: /node_modules/,
-				},
-				{
-					test: /\.tsx?$/,
-					use: 'ts-loader',
-					exclude: /node_modules/,
-				},
-			],
-		},
-		resolve: {
-			extensions: ['.tsx', '.ts', '.js'],
-		},
-		devtool: isDev && "inline-source-map",
-		devServer: isDev ? devServer : undefined
-	}
-	return config
+export default ({ mode, port }: Env) => {
+	return buildWebpack({
+		mode: mode ?? "development",
+		port: port ?? 3000,
+		paths: {
+			entry: path.resolve(__dirname, 'src', 'index.tsx'),
+			output: path.resolve(__dirname, 'build'),
+			html: path.resolve(__dirname, 'public', 'index.html'),
+		}
+	})
 }
