@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react"
-import './App.css'
+import styles from './App.module.css'
 
 interface Props { }
 
@@ -17,8 +17,8 @@ export const App = (props: Props) => {
 	return (
 		<div>
 			<h1>Hello World!</h1>
-			<h2>{count}</h2>
-			<button onClick={handleClick}>Click me</button>
+			<h2 className={styles['custom-header']}>{count}</h2>
+			<button onClick={handleClick} className={styles.button}>Click me</button>
 		</div>
 	)
 }

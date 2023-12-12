@@ -38,8 +38,40 @@ export default ({ mode = "development", port = 3000 }: Env) => {
 		module: {
 			rules: [
 				{
-					test: /\.css$/i,
-					use: [isDev ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+					test: /\.module\.css$/i,
+					use: [
+						isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+						{
+							loader: "css-loader",
+							options: {
+								importLoaders: 1,
+								sourceMap: true,
+								modules: {
+									localIdentName: isDev ? "[name]__[local]" : "[hash:base64:8]",
+								},
+							},
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: true,
+								postcssOptions: {
+									plugins: [
+										// require("postcss-import")(),
+										// require("postcss-preset-env")(),
+										// require("postcss-flexbugs-fixes"),
+										// require("postcss-url")({ url: "inline", optimizeSvgEncode: true }),
+										// require("postcss-simple-vars")(),
+										// require("postcss-calc")(),
+										// require("postcss-browser-reporter")(),
+										// require("postcss-reporter")(),
+										// require("postcss-nested")(),
+										// require("postcss-media-minmax")(),
+									],
+								},
+							},
+						},
+					],
 					exclude: /node_modules/,
 				},
 				{
