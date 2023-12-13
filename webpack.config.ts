@@ -6,9 +6,10 @@ interface Env {
 	mode?: WebpackOptions["mode"]
 	port?: number
 	analyzer?: boolean
+	skip_type_check?: boolean
 }
 
-export default ({ mode, port, analyzer }: Env) => {
+export default ({ mode, port, analyzer, skip_type_check }: Env) => {
 	return buildWebpack({
 		mode: mode ?? "development",
 		port: port ?? 3000,
@@ -20,6 +21,7 @@ export default ({ mode, port, analyzer }: Env) => {
 			components: path.resolve(__dirname, 'src', 'components'),
 			assets: path.resolve(__dirname, 'src', 'assets'),
 		},
-		analyzer: analyzer ?? false
+		analyzer: analyzer ?? false,
+		skipTypeCheck: skip_type_check ?? false
 	})
 }

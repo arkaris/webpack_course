@@ -4,10 +4,11 @@
 	"description": "walkthrough webpack configuration course",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack serve",
-		"build": "webpack",
+		"start": "webpack serve --env skip_type_check",
+		"build": "webpack --env skip_type_check",
 		"build:prod": "webpack --env mode=production",
-		"build:analyze": "webpack --env mode=production analyzer"
+		"build:analyze": "webpack --env mode=production skip_type_check analyzer",
+		"lint:ts": "tsc --noEmit"
 	},
 	"keywords": [],
 	"author": "Arkaris",
@@ -22,6 +23,7 @@
 		"@types/webpack-bundle-analyzer": "^4.6.3",
 		"@types/webpack-dev-server": "^4.7.2",
 		"css-loader": "^6.8.1",
+		"fork-ts-checker-webpack-plugin": "^9.0.2",
 		"html-webpack-plugin": "^5.5.4",
 		"mini-css-extract-plugin": "^2.7.6",
 		"postcss": "^8.4.32",

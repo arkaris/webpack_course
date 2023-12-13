@@ -2,7 +2,7 @@ import { ModuleOptions, RuleSetRule } from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { WebpackOptions } from "./types";
 
-export function buildLoaders({ mode }: WebpackOptions): ModuleOptions['rules'] {
+export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOptions['rules'] {
 	const isDev = mode === "development"
 
 	const cssLoader: RuleSetRule = {
@@ -31,7 +31,12 @@ export function buildLoaders({ mode }: WebpackOptions): ModuleOptions['rules'] {
 
 	const tsLoader: RuleSetRule = {
 		test: /\.tsx?$/,
-		use: 'ts-loader',
+		use: {
+			loader: 'ts-loader',
+			options: {
+				transpileOnly: skipTypeCheck
+			}
+		},
 		exclude: /node_modules/,
 	}
 
@@ -43,24 +48,22 @@ export function buildLoaders({ mode }: WebpackOptions): ModuleOptions['rules'] {
 	const svgLoader: RuleSetRule = {
 		test: /\.svg$/i,
 		issuer: /\.[jt]sx?$/,
-		use: [
-			{
-				loader: '@svgr/webpack',
-				options: {
-					icon: true,
-					svgoConfig: {
-						plugins: [
-							{
-								name: 'convertColors',
-								params: {
-									currentColor: true
-								}
+		use: {
+			loader: '@svgr/webpack',
+			options: {
+				icon: true,
+				svgoConfig: {
+					plugins: [
+						{
+							name: 'convertColors',
+							params: {
+								currentColor: true
 							}
-						]
-					}
+						}
+					]
 				}
 			}
-		],
+		}
 	}
 
 	return [cssLoader, tsLoader, assetLoader, svgLoader]
