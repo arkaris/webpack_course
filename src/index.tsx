@@ -10,6 +10,10 @@ const root = document.getElementById('root')
 
 if (!root) throw new Error('root not found')
 
+if (__BUILD_MODE__ === "development") {
+	console.log("===DEVELOPMENT===")
+}
+
 const container = createRoot(root)
 
 const router = createBrowserRouter([

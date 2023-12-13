@@ -1,9 +1,9 @@
 import path from "path";
 import { buildWebpack } from "./config/webpack/buildWabpack";
-import { BuildMode } from "./config/webpack/types";
+import { WebpackOptions } from "./config/webpack/types";
 
 interface Env {
-	mode?: BuildMode
+	mode?: WebpackOptions["mode"]
 	port?: number
 	analyzer?: boolean
 }

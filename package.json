@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": "webpack serve",
 		"build": "webpack",
-		"build:prod": "webpack --env mode=production"
+		"build:prod": "webpack --env mode=production",
+		"build:analyze": "webpack --env mode=production analyzer"
 	},
 	"keywords": [],
 	"author": "Arkaris",

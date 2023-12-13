@@ -7,8 +7,6 @@ export interface BuildPaths {
 	assets: string
 }
 
-export type BuildMode = "development" | "production"
-
 export interface WebpackOptions {
 	mode: BuildMode
 	port: number
