@@ -4,6 +4,7 @@ export interface BuildPaths {
 	output: string
 	pages: string
 	components: string
+	assets: string
 }
 
 export type BuildMode = "development" | "production"

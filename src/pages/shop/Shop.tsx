@@ -1,5 +1,5 @@
 interface Props { }
-function Shop({ }: Props) {
+const Shop = ({ }: Props) => {
 	return (
 		<h1>Shop</h1>
 	)

@@ -1,5 +1,5 @@
 interface Props { }
-function About({ }: Props) {
+const About = ({ }: Props) => {
 	return (
 		<h1>About</h1>
 	)
