@@ -3,7 +3,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { WebpackOptions } from "./types";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin"
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 
 export function buildPlugins({ mode, paths: { html }, analyzer, skipTypeCheck }: WebpackOptions): Configuration["plugins"] {
 	const plugins: Configuration["plugins"] = [
@@ -15,6 +16,10 @@ export function buildPlugins({ mode, paths: { html }, analyzer, skipTypeCheck }:
 
 	if (!skipTypeCheck) {
 		plugins.push(new ForkTsCheckerWebpackPlugin())
+	}
+
+	if (mode === "development") {
+		plugins.push(new ReactRefreshWebpackPlugin())
 	}
 
 	if (mode === "production") {
