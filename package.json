@@ -14,6 +14,10 @@
 	"author": "Arkaris",
 	"license": "ISC",
 	"devDependencies": {
+		"@babel/core": "^7.23.6",
+		"@babel/preset-env": "^7.23.6",
+		"@babel/preset-react": "^7.23.3",
+		"@babel/preset-typescript": "^7.23.3",
 		"@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
 		"@svgr/webpack": "^8.1.0",
 		"@types/css-modules": "^1.0.5",
@@ -23,6 +27,7 @@
 		"@types/webpack": "^5.28.5",
 		"@types/webpack-bundle-analyzer": "^4.6.3",
 		"@types/webpack-dev-server": "^4.7.2",
+		"babel-loader": "^9.1.3",
 		"css-loader": "^6.8.1",
 		"fork-ts-checker-webpack-plugin": "^9.0.2",
 		"html-webpack-plugin": "^5.5.4",

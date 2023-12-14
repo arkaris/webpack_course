@@ -44,6 +44,23 @@ export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOpt
 		exclude: /node_modules/,
 	}
 
+	const babelLoader: RuleSetRule = {
+		test: /\.tsx?$/,
+		exclude: /node_modules/,
+		use: {
+			loader: "babel-loader",
+			options: {
+				presets: [
+					'@babel/preset-env',
+					'@babel/preset-typescript',
+					["@babel/preset-react", {
+						runtime: isDev ? 'automatic' : 'classic'
+					}]
+				]
+			}
+		}
+	}
+
 	const assetLoader: RuleSetRule = {
 		test: /\.(png|jpg|jpeg|gif)$/i,
 		type: 'asset/resource',
@@ -70,5 +87,11 @@ export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOpt
 		}
 	}
 
-	return [cssLoader, tsLoader, assetLoader, svgLoader]
+	return [
+		cssLoader,
+		// tsLoader,
+		babelLoader,
+		assetLoader,
+		svgLoader
+	]
 }
