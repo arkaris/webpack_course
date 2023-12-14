@@ -1,0 +1,36 @@
+{
+  "name": "@packages/build-config",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "bump": "npm version patch --force",
+    "bump:minor": "npm version minor",
+    "lint:ts": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "@svgr/webpack": "^8.1.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/webpack": "^5.28.5",
+    "@types/webpack-bundle-analyzer": "^4.6.3",
+    "@types/webpack-dev-server": "^4.7.2",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.8.1",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
+    "html-webpack-plugin": "^5.5.4",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss-loader": "^7.3.3",
+    "react-refresh": "^0.14.0",
+    "react-refresh-typescript": "^2.0.9",
+    "style-loader": "^3.3.3",
+    "typescript": "^5.3.3",
+    "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.10.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

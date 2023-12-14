@@ -1,0 +1,27 @@
+{
+  "name": "host",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --env skip_type_check",
+    "build": "webpack --env skip_type_check",
+    "build:prod": "webpack --env mode=production",
+    "build:analyze": "webpack --env mode=production skip_type_check analyzer",
+    "bump": "npm version patch --force",
+    "bump:minor": "npm version minor",
+    "lint:ts": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/css-modules": "^1.0.5",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "postcss": "^8.4.32",
+    "ts-node": "^10.9.2",
+    "typescript-plugin-css-modules": "^5.0.2"
+  },
+  "dependencies": {
+    "@packages/build-config": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1"
+  }
+}

@@ -1,6 +1,5 @@
 import { ModuleOptions, RuleSetRule } from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import ReactRefreshTypeScript from "react-refresh-typescript";
 import { WebpackOptions } from "./types";
 import { buildBabeloader } from "./babel/buildBabelLoader";
 

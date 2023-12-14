@@ -4,8 +4,9 @@ export interface BuildPaths {
 	public: string
 	pages: string
 	components: string
-	assets: string
 }
+
+type BuildMode = "development" | "production"//?
 
 export interface WebpackOptions {
 	mode: BuildMode

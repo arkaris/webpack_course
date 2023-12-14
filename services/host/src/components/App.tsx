@@ -23,7 +23,6 @@ export const App = (props: Props) => {
 			<ul>
 				<li><Link to={'/about'}>about</Link></li>
 				<li><Link to={'/shop'}>shop</Link></li>
-				<li><Link to={'/assets'}>assets</Link></li>
 			</ul>
 			<Outlet />
 		</div>
