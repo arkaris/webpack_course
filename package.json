@@ -8,6 +8,8 @@
 		"build": "webpack --env skip_type_check",
 		"build:prod": "webpack --env mode=production",
 		"build:analyze": "webpack --env mode=production skip_type_check analyzer",
+		"bump": "npm version patch --force",
+		"bump:minor": "npm version minor",
 		"lint:ts": "tsc --noEmit"
 	},
 	"keywords": [],
