@@ -30,19 +30,19 @@ export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOpt
 		exclude: /node_modules/,
 	}
 
-	const tsLoader: RuleSetRule = {
-		test: /\.tsx?$/,
-		use: {
-			loader: 'ts-loader',
-			options: {
-				getCustomTransformers: () => ({
-					before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
-				}),
-				transpileOnly: skipTypeCheck
-			}
-		},
-		exclude: /node_modules/,
-	}
+	// const tsLoader: RuleSetRule = {
+	// 	test: /\.tsx?$/,
+	// 	use: {
+	// 		loader: 'ts-loader',
+	// 		options: {
+	// 			getCustomTransformers: () => ({
+	// 				before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+	// 			}),
+	// 			transpileOnly: skipTypeCheck
+	// 		}
+	// 	},
+	// 	exclude: /node_modules/,
+	// }
 
 	const babelLoader: RuleSetRule = {
 		test: /\.tsx?$/,
@@ -54,9 +54,10 @@ export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOpt
 					'@babel/preset-env',
 					'@babel/preset-typescript',
 					["@babel/preset-react", {
-						runtime: isDev ? 'automatic' : 'classic'
+						runtime: isDev ? 'automatic' : 'classic',
 					}]
-				]
+				],
+				plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean),
 			}
 		}
 	}
@@ -89,7 +90,6 @@ export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOpt
 
 	return [
 		cssLoader,
-		// tsLoader,
 		babelLoader,
 		assetLoader,
 		svgLoader
