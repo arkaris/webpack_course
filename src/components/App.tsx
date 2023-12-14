@@ -16,7 +16,7 @@ export const App = (props: Props) => {
 
 
 	return (
-		<div>
+		<div data-testid="App">
 			<h1>Hello World!</h1>
 			<h2 className={styles['custom-header']}>{count}</h2>
 			<button onClick={handleClick} className={styles.button}>Click me</button>

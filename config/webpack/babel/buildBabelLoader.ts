@@ -1,7 +1,19 @@
+import { RuleSetRule } from "webpack";
 import { WebpackOptions } from "../types";
+import { removeDataTestId } from "./removeDataTestid/removeDataTestid";
 
-export function buildBabeloader({ mode }: WebpackOptions) {
+export function buildBabeloader({ mode }: WebpackOptions): RuleSetRule["use"] {
 	const isDev = mode === "development"
+
+	const plugins = [];
+
+	if (mode === "development") {
+		plugins.push(require.resolve('react-refresh/babel'))
+	}
+
+	if (mode === "production") {
+		plugins.push([removeDataTestId, { props: ['data-testid'] }])
+	}
 
 	return {
 		loader: "babel-loader",
@@ -13,7 +25,7 @@ export function buildBabeloader({ mode }: WebpackOptions) {
 					runtime: isDev ? 'automatic' : 'classic',
 				}]
 			],
-			plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean),
+			plugins,
 		}
 	}
 }
