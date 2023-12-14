@@ -2,9 +2,10 @@ import { ModuleOptions, RuleSetRule } from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 import { WebpackOptions } from "./types";
+import { buildBabeloader } from "./babel/buildBabelLoader";
 
-export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOptions['rules'] {
-	const isDev = mode === "development"
+export function buildLoaders(options: WebpackOptions): ModuleOptions['rules'] {
+	const isDev = options.mode === "development"
 
 	const cssLoader: RuleSetRule = {
 		test: /\.module\.css$/i,
@@ -30,36 +31,10 @@ export function buildLoaders({ mode, skipTypeCheck }: WebpackOptions): ModuleOpt
 		exclude: /node_modules/,
 	}
 
-	// const tsLoader: RuleSetRule = {
-	// 	test: /\.tsx?$/,
-	// 	use: {
-	// 		loader: 'ts-loader',
-	// 		options: {
-	// 			getCustomTransformers: () => ({
-	// 				before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
-	// 			}),
-	// 			transpileOnly: skipTypeCheck
-	// 		}
-	// 	},
-	// 	exclude: /node_modules/,
-	// }
-
 	const babelLoader: RuleSetRule = {
 		test: /\.tsx?$/,
 		exclude: /node_modules/,
-		use: {
-			loader: "babel-loader",
-			options: {
-				presets: [
-					'@babel/preset-env',
-					'@babel/preset-typescript',
-					["@babel/preset-react", {
-						runtime: isDev ? 'automatic' : 'classic',
-					}]
-				],
-				plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean),
-			}
-		}
+		use: buildBabeloader(options)
 	}
 
 	const assetLoader: RuleSetRule = {
