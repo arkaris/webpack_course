@@ -9,7 +9,11 @@ import path from "path";
 
 export function buildPlugins({ mode, paths, analyzer, skipTypeCheck }: WebpackOptions): Configuration["plugins"] {
 	const plugins: Configuration["plugins"] = [
-		new HtmlWebpackPlugin({ template: path.resolve(paths.public, "index.html"), favicon: path.resolve(paths.public, "favicon.ico") }),
+		new HtmlWebpackPlugin({
+			template: path.resolve(paths.public, "index.html"),
+			favicon: path.resolve(paths.public, "favicon.ico"),
+			publicPath: '/',
+		}),
 		new DefinePlugin({
 			__BUILD_MODE__: JSON.stringify(mode),
 		})

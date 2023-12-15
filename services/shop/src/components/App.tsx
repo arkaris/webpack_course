@@ -14,16 +14,15 @@ export const App = (props: Props) => {
 		[count],
 	)
 
-
 	return (
 		<div data-testid="App">
-			<h1>Hello World!!!!</h1>
+			<h1>Shop module</h1>
 			<h2 className={styles['custom-header']}>{count}</h2>
 			<button onClick={handleClick} className={styles.button}>Click me</button>
 			<ul>
-				<li><Link to="/">./</Link></li>
-				<li><Link to={'/about'}>about</Link></li>
-				<li><Link to={'/shop'}>shop</Link></li>
+				<li><Link to="/shop">./</Link></li>
+				<li><Link to="/shop/page_1">page_1</Link></li>
+				<li><Link to="/shop/page_2">page_2</Link></li>
 			</ul>
 			<Outlet />
 		</div>

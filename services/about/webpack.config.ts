@@ -8,14 +8,12 @@ interface Env {
 	port?: number
 	analyzer?: boolean
 	skip_type_check?: boolean
-	ABOUT_REMOTE_URL?: string
-	SHOP_REMOTE_URL?: string
 }
 
-export default ({ mode, port, analyzer, skip_type_check, ABOUT_REMOTE_URL = 'http://localhost:3001', SHOP_REMOTE_URL = 'http://localhost:3002' }: Env) => {
+export default ({ mode, port, analyzer, skip_type_check }: Env) => {
 	const config = buildWebpack({
 		mode: mode ?? "development",
-		port: port ?? 3000,
+		port: port ?? 3001,
 		paths: {
 			entry: path.resolve(__dirname, 'src', 'index.tsx'),
 			output: path.resolve(__dirname, 'build'),
@@ -27,11 +25,10 @@ export default ({ mode, port, analyzer, skip_type_check, ABOUT_REMOTE_URL = 'htt
 	})
 
 	config.plugins.push(new webpack.container.ModuleFederationPlugin({
-		name: 'host',
+		name: 'about',
 		filename: 'remoteEntry.js',
-		remotes: {
-			about: `about@${ABOUT_REMOTE_URL}/remoteEntry.js`,
-			shop: `shop@${SHOP_REMOTE_URL}/remoteEntry.js`,
+		exposes: {
+			'./Router': './src/router/Router.tsx',
 		},
 		shared: {
 			...packageJson.dependencies,

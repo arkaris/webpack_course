@@ -1,0 +1,1 @@
+declare const __BUILD_MODE__: "development" | "production"
